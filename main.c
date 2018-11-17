@@ -33,8 +33,9 @@ char **check_size_square(char **map_2d, int sizeBSQ, int x, int y)
 
     for (int i = 0; i < sizeBSQ; i++) {
         for (int j = 0; j < sizeBSQ; j++) {
-            if (map_2d[y + i][x + j] != '.')
+            if (map_2d[y + i][x + j] != '.') {
                 return (map_2d);
+            }
         }
     }
     xstart = x;
@@ -42,7 +43,7 @@ char **check_size_square(char **map_2d, int sizeBSQ, int x, int y)
     return (display_square(map_2d, sizeBSQ, xstart, ystart));
 }
 
-char **print_array_first_line(char *map, struct stat sb)
+char **print_array_first_line(char *map, struct stat sb, int length)
 {
     char **map_2d = malloc(sizeof(char *) * sb.st_size + 1);
     int i = 0;
@@ -53,7 +54,7 @@ char **print_array_first_line(char *map, struct stat sb)
     int sizeBSQ = 0;
 
     for (k = 0; map[k] != '\0'; k++) {
-        map_2d[k] = malloc(sizeof(char) * 83);
+        map_2d[k] = malloc(sizeof(char) * length);
     }
     for (i = 0; map[i] != '\0'; i++) {
         if (map[i] == '\n') {
@@ -77,14 +78,16 @@ char **print_array_first_line(char *map, struct stat sb)
     return (map_2d);
 }
 
-int length_map(char *map)
+int length_map(char **map)
 {
     int length = 0;
 
-    for (int i = 0; map[i] >= 48 && map[i] <= 57; i++) {
-        length += map[i] - 48;
+    for (int i = 0; map[0][i] >= 48 && map[0][i] <= 57;) {
+        length += map[0][i] - 48;
         length *= 10;
+        map[0]++;
     }
+    map[0]++;
     length /= 10;
     return (length);
 }
@@ -97,7 +100,7 @@ int main(int argc, char *argv[])
     stat(argv[1], &sb);
     int size = 0;
     int length;
-    char *buff = malloc(sizeof(char) * sb.st_size);
+    char *buff = malloc(sizeof(char) * sb.st_size + 2);
 
     if (argc != 2)
         return (84);
@@ -107,10 +110,10 @@ int main(int argc, char *argv[])
         return (84);
     }
     size = read(fd, buff, sb.st_size);
-    length = length_map(buff);
-    map_2d = print_array_first_line(buff, sb);
+    length = length_map(&buff);
+    map_2d = print_array_first_line(buff, sb, length);
     for (int i = 0; i < length; i++)
-        write(1, map_2d[i], length);
+        write(1, map_2d[i], length + 1);
     close(fd);
     return 0;
 }
