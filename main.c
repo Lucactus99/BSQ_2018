@@ -78,7 +78,7 @@ char **print_array_first_line(char *map, struct stat sb, int length)
     return (map_2d);
 }
 
-int length_map(char **map)
+int length_map_y(char **map)
 {
     int length = 0;
 
@@ -92,6 +92,15 @@ int length_map(char **map)
     return (length);
 }
 
+int length_map_x(char *map)
+{
+    int length = 0;
+
+    for (int i = 0; map[i] != '\n'; i++)
+        length++;
+    return (length);
+}
+
 int main(int argc, char *argv[])
 {
     int fd;
@@ -99,7 +108,8 @@ int main(int argc, char *argv[])
     struct stat sb;
     stat(argv[1], &sb);
     int size = 0;
-    int length;
+    int lengthy;
+    int lengthx;
     char *buff = malloc(sizeof(char) * sb.st_size + 2);
 
     if (argc != 2)
@@ -110,10 +120,11 @@ int main(int argc, char *argv[])
         return (84);
     }
     size = read(fd, buff, sb.st_size);
-    length = length_map(&buff);
-    map_2d = print_array_first_line(buff, sb, length);
-    for (int i = 0; i < length; i++)
-        write(1, map_2d[i], length + 1);
+    lengthy = length_map_y(&buff);
+    lengthx = length_map_x(buff);
+    map_2d = print_array_first_line(buff, sb, lengthx);
+    for (int i = 0; i < lengthy; i++)
+        write(1, map_2d[i], lengthx + 1);
     close(fd);
     return 0;
 }
