@@ -43,9 +43,9 @@ char **check_size_square(char **map_2d, int sizeBSQ, int x, int y)
     return (display_square(map_2d, sizeBSQ, xstart, ystart));
 }
 
-char **print_array_first_line(char *map, struct stat sb, int length)
+char **print_array_first_line(char *map, struct stat sb, int lengthx, int lengthy)
 {
-    char **map_2d = malloc(sizeof(char *) * sb.st_size + 1);
+    char **map_2d = malloc(sizeof(char *) * sb.st_size + 3);
     int i = 0;
     int j = 0;
     int k = 0;
@@ -54,10 +54,10 @@ char **print_array_first_line(char *map, struct stat sb, int length)
     int sizeBSQ = 0;
 
     for (k = 0; map[k] != '\0'; k++) {
-        map_2d[k] = malloc(sizeof(char) * length);
+        map_2d[k] = malloc(sizeof(char) * lengthx + 1);
     }
-    for (i = 0; map[i] != '\0'; i++) {
-        if (map[i] == '\n') {
+    for (i = 0; i < sb.st_size + 2; i++) {
+        if (j == lengthx + 1) {
             m = j;
             j = 0;
             l++;
@@ -122,7 +122,7 @@ int main(int argc, char *argv[])
     size = read(fd, buff, sb.st_size);
     lengthy = length_map_y(&buff);
     lengthx = length_map_x(buff);
-    map_2d = print_array_first_line(buff, sb, lengthx);
+    map_2d = print_array_first_line(buff, sb, lengthx, lengthy);
     for (int i = 0; i < lengthy; i++)
         write(1, map_2d[i], lengthx + 1);
     close(fd);
