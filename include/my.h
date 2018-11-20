@@ -8,6 +8,11 @@
 #ifndef MY_H_
 #define MY_H_
 
+struct length {
+    int lengthy;
+    int lengthx;
+};
+
 void my_putchar(char);
 int my_isneg(int);
 int my_put_nbr(int);
