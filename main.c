@@ -120,6 +120,7 @@ int main(int argc, char *argv[])
         return (84);
     }
     size = read(fd, buff, sb.st_size);
+    buff[my_strlen(buff)] = '\0';
     lengthy = length_map_y(&buff);
     lengthx = length_map_x(buff);
     map_2d = print_array_first_line(buff, sb, lengthx, lengthy);
