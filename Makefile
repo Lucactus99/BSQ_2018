@@ -11,7 +11,6 @@ SRC     =	bsq_main.c \
 		bsq_check_size.c \
 		bsq_find_map.c \
 		src/my_putchar.c \
-		src/my_put_nbr.c \
 		src/my_putstr.c \
 		src/my_strlen.c
 
