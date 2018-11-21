@@ -65,12 +65,6 @@ struct position *pos, struct length *len)
             map_2d[pos->ystart + i][pos->xstart + j] = 'x';
         }
     }
-    /*
-    if (pos->ystart == 0) {
-        map_2d[pos->ystart][pos->xstart - 1] = 'x';
-        map_2d[pos->ystart][pos->xstart + sizeBsq - 1] = 'x';
-    }
-    */
     for (int i = 0; i < len->lengthy; i++) {
         write(1, map_2d[i], len->lengthx);
         my_putchar('\n');
