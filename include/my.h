@@ -29,7 +29,7 @@ struct position {
 void my_putchar(char);
 int my_putstr(char const *);
 int my_strlen(char const *);
-int create_map(char *, struct stat, struct length *);
+void create_map(char *, struct stat, struct length *);
 int display_square(char **, int, struct position *pos, struct length *);
 int check_size_square(char **, int, struct length *);
 int find_max_length(char *);

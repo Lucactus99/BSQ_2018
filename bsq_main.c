@@ -51,12 +51,12 @@ int main(int argc, char *argv[])
     int fd = open(argv[1], O_RDONLY);
     int size = read(fd, buff, sb.st_size);
     struct length *len = malloc(sizeof(struct length));
-    len->lengthy = length_map_y(&buff);
-    len->lengthx = length_map_x(buff);
 
     if (check_error(argc, fd, size) == 84)
         return (84);
-    buff[my_strlen(buff)] = '\0';
+    len->lengthy = length_map_y(&buff);
+    len->lengthx = length_map_x(buff);
+    buff[sb.st_size] = '\0';
     create_map(buff, sb, len);
     close(fd);
     return (0);
