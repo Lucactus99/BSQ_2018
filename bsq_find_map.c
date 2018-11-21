@@ -37,13 +37,12 @@ int find_map(char *map, char **map_2d, struct length *len)
 
 void create_map(char *map, struct stat sb, struct length *len)
 {
-    char **map_2d = malloc(sizeof(char *) * sb.st_size + 3);
+    char **map_2d = malloc(sizeof(char *) * (len->lengthy + 1));
     int j = 0;
     int l = 0;
 
-    for (int k = 0; map[k] != '\0'; k++) {
-        map_2d[k] = malloc(sizeof(char) * len->lengthx + 1);
-        map_2d[k][len->lengthx] = '\n';
+    for (int k = 0; k < len->lengthy + 1; k++) {
+        map_2d[k] = malloc(sizeof(char) * (len->lengthx + 1));
     }
     for (int i = 0; map[i] != '\0'; i++) {
         if (j == len->lengthx + 1) {
@@ -55,6 +54,7 @@ void create_map(char *map, struct stat sb, struct length *len)
     }
     if (find_map(map, map_2d, len) == 1)
         my_putstr(map);
+    free(map_2d);
 }
 
 int display_square(char **map_2d, int sizeBsq,
@@ -65,12 +65,15 @@ struct position *pos, struct length *len)
             map_2d[pos->ystart + i][pos->xstart + j] = 'x';
         }
     }
+    /*
     if (pos->ystart == 0) {
         map_2d[pos->ystart][pos->xstart - 1] = 'x';
         map_2d[pos->ystart][pos->xstart + sizeBsq - 1] = 'x';
     }
+    */
     for (int i = 0; i < len->lengthy; i++) {
-        write(1, map_2d[i], len->lengthx + 1);
+        write(1, map_2d[i], len->lengthx);
+        my_putchar('\n');
     }
     return (0);
 }

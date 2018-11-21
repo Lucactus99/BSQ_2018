@@ -47,17 +47,20 @@ int main(int argc, char *argv[])
 {
     struct stat sb;
     stat(argv[1], &sb);
-    char *buff = malloc(sizeof(char) * sb.st_size + 2);
+    char *buff = NULL;
     int fd = open(argv[1], O_RDONLY);
-    int size = read(fd, buff, sb.st_size);
+    int size = 0;
     struct length *len = malloc(sizeof(struct length));
 
+    buff = malloc(sizeof(char) * (sb.st_size + 1));
+    size = read(fd, buff, sb.st_size);
+    buff[sb.st_size] = '\0';
     if (check_error(argc, fd, size) == 84)
         return (84);
     len->lengthy = length_map_y(&buff);
     len->lengthx = length_map_x(buff);
-    buff[sb.st_size] = '\0';
     create_map(buff, sb, len);
     close(fd);
+    free(len);
     return (0);
 }
