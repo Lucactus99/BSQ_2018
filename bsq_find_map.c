@@ -35,7 +35,7 @@ int find_map(char *map, char **map_2d, struct length *len)
     return (1);
 }
 
-void create_map(char *map, struct stat sb, struct length *len)
+void create_map(char *map, struct length *len)
 {
     char **map_2d = malloc(sizeof(char *) * (len->lengthy + 1));
     int j = 0;

@@ -55,11 +55,11 @@ int main(int argc, char *argv[])
     buff = malloc(sizeof(char) * (sb.st_size + 1));
     size = read(fd, buff, sb.st_size);
     buff[sb.st_size] = '\0';
-    if (check_error(argc, fd, size) == 84)
-        return (84);
     len->lengthy = length_map_y(&buff);
     len->lengthx = length_map_x(buff);
-    create_map(buff, sb, len);
+    if (check_error(argc, fd, size) == 84 || check_map(buff, len) == 84)
+        return (84);
+    create_map(buff, len);
     close(fd);
     free(len);
     return (0);
