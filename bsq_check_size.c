@@ -19,17 +19,17 @@ int check_size_square_y(char **map_2d, struct length *len, int i, int sizeBSQ)
 
 int check_size_square(char **map_2d, int sizeBSQ, struct length *len)
 {
-    struct position *pos = malloc(sizeof(struct position));
-    pos->xstart = 0;
-    pos->ystart = 0;
+    struct position pos;
+    pos.xstart = 0;
+    pos.ystart = 0;
 
     for (int i = 0; i < sizeBSQ; i++) {
         if (check_size_square_y(map_2d, len, i, sizeBSQ) == 1)
             return (1);
     }
-    pos->xstart = len->x;
-    pos->ystart = len->y;
-    return (display_square(map_2d, sizeBSQ, pos, len));
+    pos.xstart = len->x;
+    pos.ystart = len->y;
+    return (display_square(map_2d, sizeBSQ, &pos, len));
 }
 
 int find_max_length(char *map)
