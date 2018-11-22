@@ -38,7 +38,7 @@ int check_error(int argc, int fd, int size)
         my_putstr("Error with opn\n");
         return (84);
     }
-    if (size == 0)
+    if (size < 0)
         return (84);
     return (0);
 }
@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
 
     buff = malloc(sizeof(char) * (sb.st_size + 1));
     size = read(fd, buff, sb.st_size);
+    if (check_error(argc, fd, size) == 84 || check_map(buff, len) == 84)
+        return (84);
     buff[sb.st_size] = '\0';
     len->lengthy = length_map_y(&buff);
     len->lengthx = length_map_x(buff);
-    if (check_error(argc, fd, size) == 84 || check_map(buff, len) == 84)
-        return (84);
     create_map(buff, len);
     close(fd);
     free(len);
