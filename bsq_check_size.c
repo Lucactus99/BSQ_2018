@@ -50,19 +50,3 @@ int find_max_length(char *map)
         length = 1;
     return (length);
 }
-
-int check_map(char *map, struct length *len)
-{
-    int line = 0;
-
-    for (int i = 0; map[i] != '\0'; i++) {
-        if (map[i] != '.' && map[i] != 'o' && map[i] != '\n') {
-            return (84);
-        }
-        if ((map[i] == '\n') && (++i % (len->lengthy + 1) * ++line != 0))
-            return (84);
-    }
-    if (line != len->lengthy)
-        return (84);
-    return (0);
-}

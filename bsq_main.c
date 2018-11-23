@@ -59,8 +59,6 @@ int main(int argc, char *argv[])
     buff[sb.st_size] = '\0';
     len->lengthy = length_map_y(&buff);
     len->lengthx = length_map_x(buff);
-    if (check_map(buff, len) == 84)
-        return (84);
     create_map(buff, len);
     close(fd);
     free(len);
