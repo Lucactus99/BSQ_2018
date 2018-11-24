@@ -33,6 +33,6 @@ void create_map(char *, struct length *);
 int display_square(char **, int, struct position *, struct length *);
 int check_size_square(char **, int, struct length *);
 int find_max_length(char *);
-int check_map(char *, struct length *);
+int check_map(char *);
 
 #endif //MY_H_

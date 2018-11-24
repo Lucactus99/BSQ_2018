@@ -16,6 +16,8 @@ int length_map_y(char **map)
         length *= 10;
         map[0]++;
     }
+    if (length == 0)
+        exit (84);
     map[0]++;
     length /= 10;
     return (length);
@@ -27,6 +29,8 @@ int length_map_x(char *map)
 
     for (int i = 0; map[i] != '\n'; i++)
         length++;
+    if (length == 0)
+        exit (84);
     return (length);
 }
 
@@ -38,7 +42,7 @@ int check_error(int argc, int fd, int size)
         my_putstr("Error with opn\n");
         return (84);
     }
-    if (size < 0)
+    if (size <= 0)
         return (84);
     return (0);
 }
@@ -59,6 +63,8 @@ int main(int argc, char *argv[])
     buff[sb.st_size] = '\0';
     len->lengthy = length_map_y(&buff);
     len->lengthx = length_map_x(buff);
+    if (check_map(buff) == 84)
+        return (84);
     create_map(buff, len);
     close(fd);
     free(len);
