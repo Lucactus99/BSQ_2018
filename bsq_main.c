@@ -10,6 +10,7 @@
 int length_map_y(char **map)
 {
     int length = 0;
+    int lengthTmp = 0;
 
     for (int i = 0; map[0][i] >= 48 && map[0][i] <= 57;) {
         length += map[0][i] - 48;
@@ -20,6 +21,12 @@ int length_map_y(char **map)
         exit (84);
     map[0]++;
     length /= 10;
+    for (int j = 0; map[0][j] != '\0'; j++) {
+        if (map[0][j] == '\n')
+            lengthTmp++;
+    }
+    if (length != lengthTmp)
+        exit (84);
     return (length);
 }
 
