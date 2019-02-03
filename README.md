@@ -17,3 +17,5 @@ The program prints the board, with some "." replaced by "x" to represent the lar
 
 If ever there are several solutions, the program represents only the highest square. If they are still several
 solutions, the program will print the square to the left.
+
+Mark: 18/20
